@@ -9,10 +9,9 @@ const urls = {
 function* fetchCurrencies(action){
   try {
     const currenciesResponse = yield axios.get(urls.BASE_URL)
-    console.log({currenciesResponse})
     yield put({
       type: types.GET_CURRENCIES_SUCCESS,
-      currencies: currenciesResponse.data
+      payload: currenciesResponse.data
     })
   }catch(e){
     yield put({
@@ -22,8 +21,26 @@ function* fetchCurrencies(action){
   }
 }
 
-function* currencySaga() {
+function* convertCurrency(action){
+  try {
+    const url = `${urls.BASE_URL}?base=${action.from}&symbols=${action.to}`
+    const response = yield axios.get(url)
+    yield put({
+      type: types.CONVERT_CURRENCY_SUCCESS,
+      payload: response.data.rates[action.to]
+    })
+  }catch (e){
+    yield put({
+      type: types.CONVERT_CURRENCY_FAILED,
+      message: e.message
+    })
+  }
+}
+
+export function* currencySaga() {
   yield takeEvery(types.GET_CURRENCIES_REQUESTED, fetchCurrencies)
 }
 
-export default currencySaga
+export function* convertorSaga(){
+  yield takeEvery(types.CONVERT_CURRENCY_REQUESTED, convertCurrency)
+}

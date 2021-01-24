@@ -3,4 +3,52 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
+  color: #00112c;
+  font-family: "Fakt",sans-serif,Helvetica,Arial;
+}
+
+#converter{
+  margin-top: 30px;
+  border: 3px solid #00112c;
+  padding: 30px;
+  border-radius: .3em;
+}
+
+h1{
+  color: #0abf53;
+}
+
+input {
+  border: 2px solid #00112c;
+  border-radius: .3em;
+  width: 180px;
+  height: 30px;
+  box-sizing: border-box;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  padding: 10px ;
+}
+
+input:focus {
+  border: 2px solid #0abf53;
+}
+
+select {
+  margin-left: 10px;
+  height: 30px;
+  border: 2px solid #00112c;
+  outline: none;
+  border-radius: .3em;
+  box-sizing: border-box;
+  -webkit-transition: 0.5s;
+}
+
+select:focus {
+  border: 2px solid #0abf53;
+}
+
+option {
+  padding: 10px;
+  width: 30px;
 }
