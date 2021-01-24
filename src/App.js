@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import {useState, useEffect} from 'react'
 import './App.css';
+import CurrencyRow from './components/currency/currencyRow'
+import {useSelector, useDispatch} from "react-redux"
+import { getCurrencies } from "./redux/actions/exchange"
 
 function App() {
+  const [rate, setRate] = useState(null)
+  const dispatch = useDispatch()
+  const currencies = useSelector(state => state)
+  console.log(currencies)
+
+  useEffect(() => {
+    dispatch(getCurrencies())
+  }, [dispatch])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Currency converter</h1>
+      <CurrencyRow />
+      <p>rate : {rate}</p>
+      <CurrencyRow />
+    </>
   );
 }
 
