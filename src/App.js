@@ -14,7 +14,6 @@ function App() {
   const [to, setTo] = useState(INITIAL_TO_CURRENCY)
 
   const dispatch = useDispatch()
-  const isLoading = useSelector(state => state.currencies.isLoading)
   const currencies = useSelector(state => state.currencies.currencies)
   const rate = useSelector(state => state.currencies.exchangeRate)
 
@@ -66,28 +65,23 @@ function App() {
   }
 
   return (
-    <div>
-      {
-        isLoading ? <p>Loading...</p> :
-          <div id="converter">
-            <h1>Currency converter</h1>
-            <CurrencyRow
-              currencies={currencies}
-              amount={fromAmount}
-              onChangeCurrency={(e) => onChangeSelectFrom(e)}
-              onChangeAmount={handleFromAmountChange}
-              selectedCurrency={from}
-            />
-            <p>Exchange rate: {rate}</p>
-            <CurrencyRow
-              currencies={currencies}
-              amount={toAmount}
-              onChangeCurrency={(e) => onChangeSelectTo(e)}
-              onChangeAmount={handleToAmountChange}
-              selectedCurrency={to}
-            />
-          </div>
-      }
+    <div id="converter">
+      <h1>Currency converter</h1>
+      <CurrencyRow
+        currencies={currencies}
+        amount={fromAmount}
+        onChangeCurrency={(e) => onChangeSelectFrom(e)}
+        onChangeAmount={handleFromAmountChange}
+        selectedCurrency={from}
+      />
+      <p>Exchange rate: {rate}</p>
+      <CurrencyRow
+        currencies={currencies}
+        amount={toAmount}
+        onChangeCurrency={(e) => onChangeSelectTo(e)}
+        onChangeAmount={handleToAmountChange}
+        selectedCurrency={to}
+      />
     </div>
   )
 }
